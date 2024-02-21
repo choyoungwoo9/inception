@@ -1,0 +1,52 @@
+version: "3.1"
+
+services:
+  nginx:
+    image: nginx:0.01
+    build:
+      context: ./requirements/nginx
+    init: true
+    container_name: nginx
+    restart: on-failure
+    ports:
+      - "443:443"
+    volumes:
+      - /home/youngwch/data/wordpress:/var/www/html
+    depends_on:
+      - wordpress
+    networks:
+      - mynet
+
+  wordpress:
+    image: wordpress:0.01
+    build:
+      context: ./requirements/wordpress
+    init: true
+    container_name: wordpress
+    restart: on-failure
+    volumes:
+      - /home/youngwch/data/wordpress:/var/www/html
+    env_file:
+      - .env
+    depends_on:
+      - db
+    networks:
+      - mynet
+
+  db:
+    image: db:0.01
+    build:
+      context: ./requirements/mariadb
+    init: true
+    container_name: db
+    restart: on-failure
+    env_file:
+      - .env
+    volumes:
+      - /home/youngwch/data/mariadb/:/var/lib/mysql
+    networks:
+      - mynet
+
+networks:
+  mynet:
+    driver: bridge

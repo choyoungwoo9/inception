@@ -7,7 +7,7 @@ cp -r /wordpress/* /var/www/html/ \
 && sed -i "s/database_name_here/${MYSQL_DATABASE}/g" /var/www/html/wp-config.php \
 && sed -i "s/username_here/${MYSQL_USER}/g" /var/www/html/wp-config.php \
 && sed -i "s/password_here/${MYSQL_PASSWORD}/g" /var/www/html/wp-config.php \
-&& sed -i "s/localhost/db/g" /var/www/html/wp-config.php \
+&& sed -i "s/localhost/mariadb/g" /var/www/html/wp-config.php \
 
 fi
 

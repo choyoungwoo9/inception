@@ -11,7 +11,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - /home/youngwch/data/wordpress:/var/www/html
+      - wordpress_data:/var/www/html
     depends_on:
       - wordpress
     networks:
@@ -25,28 +25,43 @@ services:
     container_name: wordpress
     restart: on-failure
     volumes:
-      - /home/youngwch/data/wordpress:/var/www/html
+      - wordpress_data:/var/www/html
     env_file:
       - .env
     depends_on:
-      - db
+      - mariadb
     networks:
       - mynet
 
-  db:
-    image: db:0.01
+  mariadb:
+    image: mariadb:0.01
     build:
       context: ./requirements/mariadb
     init: true
-    container_name: db
+    container_name: mariadb
     restart: on-failure
     env_file:
       - .env
     volumes:
-      - /home/youngwch/data/mariadb/:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
     networks:
       - mynet
 
 networks:
   mynet:
     driver: bridge
+
+volumes:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "/Users/youngwch/42/5circle/Inception/subject/srcs/data/mariadb"
+
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "/Users/youngwch/42/5circle/Inception/subject/srcs/data/wordpress"

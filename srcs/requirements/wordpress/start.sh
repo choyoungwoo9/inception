@@ -9,7 +9,7 @@ mv wp-cli.phar /usr/local/bin/wp
 cd /var/www/html
 wp core download --allow-root
 
-wp config create --dbname=${MYSQL_DATABASE} --dbuser=${MYSQL_USER} --dbpass=${MYSQL_PASSWORD} --dbhost=${MYSQL_HOST} --dbprefix=wp_ --allow-root
+wp config create --dbname=${INCEPTION_MYSQL_DATABASE} --dbuser=${INCEPTION_MYSQL_USER} --dbpass=${INCEPTION_MYSQL_PASSWORD} --dbhost=${INCEPTION_MYSQL_HOST} --dbprefix=wp_ --allow-root
 wp core install --url=${INCEPTION_URL} --title=${INCEPTION_TITLE} --admin_user=${ADMIN_USER} --admin_password=${ADMIN_PASSWORD} --admin_email=${ADMIN_EMAIL} --allow-root
 wp user create ${USER_NAME} ${USER_EMAIL} --role=subscriber --user_pass=${USER_PASSWORD} --allow-root
 

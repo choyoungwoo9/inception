@@ -57,11 +57,11 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: "/Users/youngwch/42/5circle/Inception/subject/srcs/data/mariadb"
+      device: "/home/youngwch/data/wordpress/mariadb"
 
   wordpress_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: "/Users/youngwch/42/5circle/Inception/subject/srcs/data/wordpress"
+      device: "/home/youngwch/data/wordpress"
